@@ -1,3 +1,69 @@
 html{
   background-color:slateblue;
+  
 }
+
+body{
+  color:white;
+  height:100vh;
+  width:100vw;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-rows:10% 80% 10%;
+  grid-template-columns: 20% 60% 20%;
+}
+
+header{
+  background-color:rgb(17, 73, 119);
+  height:3.5rem;
+  width:100%;
+  
+  text-shadow: 1px 1px black;
+  font-size:2rem;
+  text-align:center;
+  box-shadow:5px 1px 5px 1px black;
+  grid-area: 1 / 1 / 1 / 4;
+}
+
+.mainContainer{
+  background-color: rgb(17, 73, 119);
+  grid-area: 2 / 2 / 2 / 3;
+  /* padding: 10%; */
+  box-shadow:5px 1px 5px 1px black;
+  border-color:black;
+  border-style: solid;
+  display:grid;
+  grid-template-columns: 20% 80%;
+  padding:1% 1% 1%;
+}
+
+.right{
+  grid-column: 2 / 2;
+  background-color:gray;
+  box-shadow:inset 3px 3px 5px 5px black;
+  display:grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.left{
+  grid-column: 1 / 1;
+  display:grid;
+  grid-template-rows: 30% 40% 30%;
+  grid-template-columns:20% 60% 20%;
+  font-size:1.5rem;
+}
+
+.left > ul {
+  list-style-type: none;
+  grid-area: 2 / 2 / 2 / 2;
+  padding:0;
+}
+
+.cell{
+  border-style:solid;
+  border-color:rgb(73, 68, 68);
+  border-width:1px;
+}
+
