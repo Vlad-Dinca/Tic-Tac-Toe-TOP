@@ -65,5 +65,10 @@ header{
   border-style:solid;
   border-color:rgb(73, 68, 68);
   border-width:1px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:6rem;
+  text-shadow: 1px 1px rgb(73, 68, 68);
 }
 
