@@ -21,9 +21,10 @@ function gameReset(board){
   board.setBoard([0, 0, 0, 0, 0, 0, 0, 0, 0]);
 }
 
-function playGame(){
+function playGame(player1, player2){
   let turn = 1;
   let cells = document.querySelectorAll(".cell");
+  console.log(player1 + " " + player2);
 
   cells.forEach((cell, index) =>{
     cell.dataset.index = index;
@@ -56,15 +57,7 @@ function playGame(){
 }
 
 function gameController(player1, player2, board) {
-  // board.setCell(0, 1);
-  // board.setCell(1, 2);
-  // board.setCell(2, 2);
-  // board.setCell(3, 2);
-  // board.setCell(4, 1);
-  // board.setCell(5, 1);
-  // board.setCell(6, 1);
-  // board.setCell(7, 2);
-  // board.setCell(8, 2);
+
   let currentBoard = board.getBoard();
   console.log(currentBoard);
 
@@ -101,15 +94,32 @@ function gameController(player1, player2, board) {
   return board.getBoard();
 }
 
-function showModal(){
+function Modal(){
   
+  dialog = document.querySelector("dialog");
+  dialog.show();
+
+  exit = document.querySelector("#exit")
+  exit.addEventListener("click", () =>{
+    dialog.close();
+  })
+
+  player1 = document.querySelector("#player1").value;
+  player2 = document.querySelector("#player2").value;
+
+  play = document.querySelector("#play")
+  play.addEventListener("click", ( )=>{
+    playGame(player1, player2);
+    dialog.close();
+    
+  })
 }
 
 let player1 = { name: "Vlad" };
 let player2 = { name: "Dinca" };
 
-showModal()
+Modal()
 
 
-playGame();
+
 console.log(board.getBoard()); 

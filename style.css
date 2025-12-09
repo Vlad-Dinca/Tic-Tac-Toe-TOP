@@ -72,3 +72,32 @@ header{
   text-shadow: 1px 1px rgb(73, 68, 68);
 }
 
+
+dialog[open=""]{
+  top:30%;
+  display:grid;
+  grid-gap:15px;
+  grid-template-columns: 90% 10%;;
+  background-color:slateblue;
+  
+}
+
+dialog[open=""]::backdrop{
+  opacity:50% black;
+}
+
+dialog *{
+  grid-column: 1 / 2;
+  color:white;
+  text-shadow: 1px 1px black;
+}
+
+dialog input, dialog button{
+  background-color:gray;
+}
+
+dialog #exit{
+  grid-column: 2 / 2;
+}
+
+
