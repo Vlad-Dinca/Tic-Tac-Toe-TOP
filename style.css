@@ -52,7 +52,7 @@ header{
   display:grid;
   grid-template-rows: 30% 40% 30%;
   grid-template-columns:20% 60% 20%;
-  font-size:1.5rem;
+  font-size:1.2rem;
 }
 
 .left > ul {
@@ -79,6 +79,7 @@ dialog[open=""]{
   grid-gap:15px;
   grid-template-columns: 90% 10%;;
   background-color:slateblue;
+  padding:3%;
   
 }
 

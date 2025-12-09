@@ -1,4 +1,9 @@
 const board = gameBoard();
+let gameLocked = false;
+let p1Score = 0;
+let p2Score = 0;
+let dScore = 0;
+let turn = 1;
 
 
 function gameBoard() {
@@ -19,22 +24,28 @@ function gameBoard() {
 
 function gameReset(board){
   board.setBoard([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => {
+  cell.textContent="";
+  })
+  gameLocked = false;
+  // playGame(player1, player2);
 }
 
-function playGame(player1, player2){
+function cellClick(player1, player2){
   let turn = 1;
   let cells = document.querySelectorAll(".cell");
-  console.log(player1 + " " + player2);
 
   cells.forEach((cell, index) =>{
     cell.dataset.index = index;
   })
   
-  
   console.log(cells);
     cells.forEach((cell) =>{
       cell.addEventListener(("click"), () =>{
-
+        
+        if (gameLocked) return;
+        
         let index = parseInt(cell.dataset.index);
         if (board.getBoard()[index] !== 0) return;
 
@@ -56,9 +67,18 @@ function playGame(player1, player2){
   })
 }
 
+
+function playGame(player1, player2){
+  gameReset(board);
+  cellClick(player1, player2);
+  
+}
+
 function gameController(player1, player2, board) {
 
   let currentBoard = board.getBoard();
+  let displayWinner = document.querySelector("#displayWinner");
+
   console.log(currentBoard);
 
   if ((currentBoard[0] === 1 && currentBoard[2] === 1 && currentBoard[1] === 1)
@@ -71,8 +91,11 @@ function gameController(player1, player2, board) {
     ||(currentBoard[2] === 1 && currentBoard[4] === 1 && currentBoard[6] === 1)){
 
       console.log("Player 1 has won");
-      gameReset(board);
+      p1Score++;
+      displayWinner.textContent = `${player1} has won!`
+      updateScoreboard(player1, player2)
       console.log(board.getBoard());
+      gameLocked = true;
     }
 
   else if((currentBoard[0] === 2 && currentBoard[2] === 2 && currentBoard[1] === 2)
@@ -85,14 +108,31 @@ function gameController(player1, player2, board) {
         ||(currentBoard[2] === 2 && currentBoard[4] === 2 && currentBoard[6] === 2)){
 
           console.log("Player 2 has won")
-          gameReset(board);
+          p2Score++;
+          displayWinner.textContent = `${player2} has won!`
+          updateScoreboard(player1, player2)
+          gameLocked = true;
         }
     else if(!currentBoard.includes(0)){
       console.log("It's a draw");
-      gameReset(board);
+      dScore++;
+      displayWinner.textContent = `It's a draw!`
+      updateScoreboard(player1, player2)
+      gameLocked = true;
     }
   return board.getBoard();
 }
+
+ function updateScoreboard(player1, player2){
+    let player1Score = document.querySelector("#player1Score");
+    let drawScore = document.querySelector("#drawScore");
+    let player2Score = document.querySelector("#player2Score");
+
+    player1Score.textContent=`${player1}: ${p1Score}`; 
+    drawScore.textContent=`Draw: ${dScore}`; 
+    player2Score.textContent=`${player2}: ${p2Score}`; 
+  }
+
 
 function Modal(){
   
@@ -110,16 +150,17 @@ function Modal(){
   play = document.querySelector("#play")
   play.addEventListener("click", ( )=>{
     playGame(player1, player2);
+    updateScoreboard(player1, player2);
     dialog.close();
     
   })
 }
 
-let player1 = { name: "Vlad" };
-let player2 = { name: "Dinca" };
-
 Modal()
 
+playButton = document.querySelector("#playAnother");
+playButton.addEventListener("click", () => gameReset(board));
+  
 
 
 console.log(board.getBoard()); 
